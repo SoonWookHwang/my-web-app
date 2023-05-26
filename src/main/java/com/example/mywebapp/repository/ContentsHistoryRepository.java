@@ -1,6 +1,6 @@
 package com.example.mywebapp.repository;
 
-
+import com.example.mywebapp.domain.content.Contents;
 import com.example.mywebapp.domain.history.ContentsHistory;
 import java.time.LocalDateTime;
 import java.util.List;
@@ -16,5 +16,6 @@ public interface ContentsHistoryRepository extends JpaRepository<ContentsHistory
   List<Long> findMembersWhoReadAdultContent(LocalDateTime startDate);
 
   @Query("SELECT ch FROM ContentsHistory ch WHERE ch.contents = :contents")
-  Page<ContentsHistory> findMembersByContent(Pageable pageable, @Param("contents") Contents contents);
+  Page<ContentsHistory> findMembersByContent(Pageable pageable,
+      @Param("contents") Contents contents);
 }

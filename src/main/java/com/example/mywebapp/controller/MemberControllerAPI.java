@@ -1,6 +1,5 @@
 package com.example.mywebapp.controller;
 
-
 import com.example.mywebapp.domain.member.Member;
 import com.example.mywebapp.domain.member.MemberInfo;
 import com.example.mywebapp.dto.request.member.MemberDetailsRequestDto;

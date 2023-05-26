@@ -1,6 +1,5 @@
 package com.example.mywebapp.controller;
 
-
 import com.example.mywebapp.dto.request.contents.ContentsRequestDto;
 import com.example.mywebapp.dto.response.ContentsResponseEntity;
 import com.example.mywebapp.service.ContentsService;
@@ -32,14 +31,15 @@ public class ContentsController {
 
   //Read
   @GetMapping("/contents/my")
-  public ContentsResponseEntity<?> getAllMyContents(){
+  public ContentsResponseEntity<?> getAllMyContents() {
     return ContentsResponseEntity.success(contentsService.getAllMyContents());
   }
+
   @GetMapping("/contents/{contentsId}")
-  public ContentsResponseEntity<?> readContent(@PathVariable Long contentsId){
-    try{
+  public ContentsResponseEntity<?> readContent(@PathVariable Long contentsId) {
+    try {
       return ContentsResponseEntity.success(contentsService.readContent(contentsId));
-    }catch (Exception e){
+    } catch (Exception e) {
       return ContentsResponseEntity.fail(HttpStatus.BAD_REQUEST, e.getMessage());
     }
   }

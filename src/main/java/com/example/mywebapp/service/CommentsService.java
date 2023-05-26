@@ -1,6 +1,5 @@
 package com.example.mywebapp.service;
 
-
 import com.example.mywebapp.domain.comment.Comments;
 import com.example.mywebapp.domain.content.Contents;
 import com.example.mywebapp.domain.member.Member;
@@ -45,9 +44,9 @@ public class CommentsService {
     Member loginUser = loginUser();
 
     Comments targetComments = commentsRepository.findById(commentsId)
-        .orElseThrow(()->new NoSuchElementException("해당 댓글이 존재하지 않습니다."));
+        .orElseThrow(() -> new NoSuchElementException("해당 댓글이 존재하지 않습니다."));
 
-    if(!loginUser.getUsername().equals(targetComments.getMember().getUsername())){
+    if (!loginUser.getUsername().equals(targetComments.getMember().getUsername())) {
       throw new IllegalAccessException("작성자가 아니면 수정이 불가능합니다");
     }
     targetComments.update(targetComments, dto);
@@ -55,7 +54,7 @@ public class CommentsService {
     return targetComments;
   }
 
-  public Member loginUser(){
+  public Member loginUser() {
     Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
     Member loginUser = memberRepository.findByUsername(authentication.getName()).orElseThrow();
     return loginUser;

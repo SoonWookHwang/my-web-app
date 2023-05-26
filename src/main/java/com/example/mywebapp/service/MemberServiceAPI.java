@@ -17,6 +17,7 @@ public interface MemberServiceAPI {
   MemberResponseEntity<Member> isDormant(String isDormant);
 
   MemberResponseEntity<Member> isAdult(String isAdult) throws IllegalAccessException;
+
   // 계정 삭제
   MemberResponseEntity<?> deleteMember(Long memberId);
 

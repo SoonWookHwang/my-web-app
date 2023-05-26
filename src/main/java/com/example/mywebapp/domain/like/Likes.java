@@ -1,6 +1,5 @@
 package com.example.mywebapp.domain.like;
 
-
 import com.example.mywebapp.domain.Timestamped;
 import com.example.mywebapp.domain.content.Contents;
 import com.example.mywebapp.domain.member.Member;
@@ -34,7 +33,8 @@ public class Likes extends Timestamped {
   @Column(nullable = false)
   private boolean status;
 
-  @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH, CascadeType.DETACH})
+  @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH,
+      CascadeType.DETACH})
   @JoinColumn(name = "member_id", nullable = false, updatable = false)
   private Member member;
 

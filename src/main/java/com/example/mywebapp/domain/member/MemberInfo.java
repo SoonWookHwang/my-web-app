@@ -3,7 +3,6 @@ package com.example.mywebapp.domain.member;
 import com.example.mywebapp.domain.Timestamped;
 import com.example.mywebapp.dto.request.member.MemberDetailsRequestDto;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -61,7 +60,7 @@ public class MemberInfo extends Timestamped {
     }
   }
   @Builder
-  public MemberInfo(String email, int age,String gender){
+  public MemberInfo(String email, int age, String gender) {
     this.email = email;
     this.age = age;
     this.gender = gender;

@@ -1,6 +1,5 @@
 package com.example.mywebapp.domain.history;
 
-
 import com.example.mywebapp.domain.Timestamped;
 import com.example.mywebapp.domain.content.Contents;
 import com.example.mywebapp.domain.member.Member;
@@ -26,7 +25,8 @@ public class ContentsHistory extends Timestamped {
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
 
-  @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH, CascadeType.DETACH})
+  @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH,
+      CascadeType.DETACH})
   @JoinColumn(name = "member_id", nullable = false, updatable = false)
   private Member member;
 

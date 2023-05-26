@@ -6,7 +6,6 @@ import com.example.mywebapp.domain.member.Member;
 import com.example.mywebapp.dto.request.contents.CommentRequestDto;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -59,6 +58,7 @@ public class Comments extends Timestamped {
     this.member = member;
     this.contents = contents;
   }
+
   public void update(Comments updateComments, CommentRequestDto dto) {
     updateComments.comments = dto.getComments();
   }

@@ -1,6 +1,5 @@
 package com.example.mywebapp.security;
 
-
 import com.example.mywebapp.repository.MemberRepository;
 import com.example.mywebapp.repository.RefreshTokenRepository;
 import io.jsonwebtoken.Claims;
@@ -146,6 +145,7 @@ public class JwtTokenProvider {
     }
     return null;
   }
+
   public boolean validateRefreshToken(String refreshToken) {
     LOGGER.info("[validateRefreshToken] 리프레쉬 토큰 유효 체크 시작");
     try {
@@ -174,7 +174,8 @@ public class JwtTokenProvider {
     if (userId == null) {
       throw new IllegalArgumentException("Invalid refresh token");
     }
-    String username = memberRepository.findById(Long.parseLong(userId)).orElseThrow(()->new NoSuchElementException("회원 정보가 존재하지 않습니다.")).getUsername();
+    String username = memberRepository.findById(Long.parseLong(userId))
+        .orElseThrow(() -> new NoSuchElementException("회원 정보가 존재하지 않습니다.")).getUsername();
     List<String> roles = userDetailsService.loadUserByUsername(username).getAuthorities()
         .stream()
         .map(GrantedAuthority::getAuthority)

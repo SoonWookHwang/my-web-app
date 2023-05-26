@@ -38,7 +38,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         .antMatchers(HttpMethod.GET, "/contents/find/**").permitAll() //좋아요 싫어요 상위 컨텐츠 조회는 인증 생략
 
         .antMatchers("**exception**").permitAll()
-        .antMatchers("/contents/status/**","/member/delete/**","/member/admin/**").hasRole("ADMIN")
+        .antMatchers("/contents/status/**", "/member/delete/**", "/member/admin/**")
+        .hasRole("ADMIN")
         .anyRequest().access("hasAnyRole('USER', 'ADMIN')")
         .and()
         .exceptionHandling().accessDeniedHandler(new CustomAccessDeniedHandler())

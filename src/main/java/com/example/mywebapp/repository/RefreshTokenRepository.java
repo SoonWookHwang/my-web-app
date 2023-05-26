@@ -30,7 +30,8 @@ public class RefreshTokenRepository {
   }
 
   public String findRefreshTokenByUserId(Long userId) {
-    for (String refreshToken : Objects.requireNonNull(redisTemplate.keys("*"),"DB에 해당 리프레쉬 토큰이 존재하지 않습니다.")) {
+    for (String refreshToken : Objects.requireNonNull(redisTemplate.keys("*"),
+        "DB에 해당 리프레쉬 토큰이 존재하지 않습니다.")) {
       String storedUserId = redisTemplate.opsForValue().get(refreshToken);
       if (String.valueOf(userId).equals(storedUserId)) {
         return refreshToken;
@@ -38,6 +39,7 @@ public class RefreshTokenRepository {
     }
     return null;
   }
+
   public String findUserIdByRefreshToken(String refreshToken) {
     Set<String> keys = redisTemplate.keys("*"); // 모든 키 조회
     for (String key : keys) {

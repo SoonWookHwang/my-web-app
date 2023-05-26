@@ -1,6 +1,9 @@
 package com.example.mywebapp.controller;
 
-
+import com.example.mywebapp.domain.member.Member;
+import com.example.mywebapp.domain.member.MemberInfo;
+import com.example.mywebapp.dto.request.member.LoginRequestDto;
+import com.example.mywebapp.dto.request.member.MemberDetailsRequestDto;
 import com.example.mywebapp.dto.request.member.SignUpRequestDto;
 import com.example.mywebapp.dto.response.MemberResponseEntity;
 import com.example.mywebapp.service.ContentsHistoryService;
@@ -45,7 +48,7 @@ public class MemberController implements MemberControllerAPI {
 
     log.info("[signIn] 로그인을 시도하고 있습니다. id : {}, pw : ****", requestDto.getUsername());
     try {
-      return MemberResponseEntity.success(memberService.login(requestDto,response));
+      return MemberResponseEntity.success(memberService.login(requestDto, response));
     } catch (Exception e) {
       return MemberResponseEntity.fail(HttpStatus.BAD_REQUEST, e.getMessage());
     }

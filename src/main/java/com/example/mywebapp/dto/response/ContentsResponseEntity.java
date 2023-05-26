@@ -1,11 +1,9 @@
 package com.example.mywebapp.dto.response;
 
-
 import com.example.mywebapp.domain.content.Contents;
 import java.util.List;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
-
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 

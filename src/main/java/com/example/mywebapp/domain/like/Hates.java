@@ -1,8 +1,8 @@
 package com.example.mywebapp.domain.like;
 
-
 import com.example.mywebapp.domain.Timestamped;
 import com.example.mywebapp.domain.content.Contents;
+import com.example.mywebapp.domain.member.Member;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -32,7 +32,8 @@ public class Hates extends Timestamped {
 
   @Column(nullable = false)
   private boolean status;
-  @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH, CascadeType.DETACH})
+  @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH,
+      CascadeType.DETACH})
   @JoinColumn(name = "member_id", nullable = false, updatable = false)
   private Member member;
 

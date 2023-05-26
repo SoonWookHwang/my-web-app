@@ -1,6 +1,5 @@
 package com.example.mywebapp.controller;
 
-
 import com.example.mywebapp.service.HateService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -14,7 +13,7 @@ public class HateController {
   private final HateService hateService;
 
   @PostMapping("/hate")
-  public String addHate(@RequestParam Long contentsId){
+  public String addHate(@RequestParam Long contentsId) {
     return hateService.hateContents(contentsId);
   }
 

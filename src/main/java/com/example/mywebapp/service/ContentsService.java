@@ -1,7 +1,8 @@
 package com.example.mywebapp.service;
 
-
 import com.example.mywebapp.domain.content.Contents;
+import com.example.mywebapp.domain.content.ContentsType;
+import com.example.mywebapp.domain.member.Member;
 import com.example.mywebapp.dto.request.contents.ContentsRequestDto;
 import com.example.mywebapp.repository.ContentsRepsitory;
 import com.example.mywebapp.repository.MemberRepository;

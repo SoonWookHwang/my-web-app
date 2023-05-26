@@ -11,6 +11,6 @@ import lombok.ToString;
 @ToString
 public class EntryPointErrorResponse {
 
-    private String msg;
+  private String msg;
 
- }
+}

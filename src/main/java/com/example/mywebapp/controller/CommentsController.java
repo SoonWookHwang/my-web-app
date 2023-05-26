@@ -1,6 +1,5 @@
 package com.example.mywebapp.controller;
 
-
 import com.example.mywebapp.domain.comment.Comments;
 import com.example.mywebapp.dto.request.contents.CommentRequestDto;
 import com.example.mywebapp.dto.response.ContentsResponseEntity;

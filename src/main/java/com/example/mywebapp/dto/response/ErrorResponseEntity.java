@@ -1,6 +1,5 @@
 package com.example.mywebapp.dto.response;
 
-
 import com.example.mywebapp.grobal.CustomErrorCode;
 import lombok.Builder;
 import lombok.Data;

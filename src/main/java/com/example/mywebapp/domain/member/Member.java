@@ -2,11 +2,11 @@ package com.example.mywebapp.domain.member;
 
 import com.example.mywebapp.domain.Timestamped;
 import com.example.mywebapp.domain.content.Contents;
+import com.example.mywebapp.domain.member.enums.Adult;
 import com.example.mywebapp.domain.member.enums.Dormant;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonProperty.Access;
-
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;

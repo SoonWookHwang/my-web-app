@@ -1,6 +1,5 @@
 package com.example.mywebapp.domain.content;
 
-
 import com.example.mywebapp.domain.Timestamped;
 import com.example.mywebapp.domain.history.ContentsHistory;
 import com.example.mywebapp.domain.like.Likes;
@@ -53,7 +52,8 @@ public class Contents extends Timestamped {
   @Column
   private int coin;
 
-  @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH, CascadeType.DETACH})
+  @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH,
+      CascadeType.DETACH})
   @JoinColumn(name = "member_id", nullable = false, updatable = false)
   @OnDelete(action = OnDeleteAction.CASCADE)
   @JsonIgnore
@@ -74,7 +74,8 @@ public class Contents extends Timestamped {
   private int hated;
 
   @Builder
-  public Contents(String title, String author, String isFree, String isAdult, Member member, int liked, int hated) {
+  public Contents(String title, String author, String isFree, String isAdult, Member member,
+      int liked, int hated) {
     this.title = title;
     this.author = author;
     this.isFree = isFree;

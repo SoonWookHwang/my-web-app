@@ -2,6 +2,7 @@ package com.example.mywebapp.service;
 
 import com.example.mywebapp.domain.content.Contents;
 import com.example.mywebapp.domain.history.ContentsHistory;
+import com.example.mywebapp.domain.member.Member;
 import com.example.mywebapp.repository.ContentsHistoryRepository;
 import com.example.mywebapp.repository.ContentsRepsitory;
 import com.example.mywebapp.repository.MemberRepository;
@@ -16,6 +17,7 @@ import org.springframework.stereotype.Service;
 @Service
 @RequiredArgsConstructor
 public class ContentsHistoryService {
+
   private final MemberRepository memberRepository;
   private final ContentsHistoryRepository contentsHistoryRepository;
 
@@ -25,15 +27,16 @@ public class ContentsHistoryService {
     LocalDateTime startDate = LocalDateTime.now().minusDays(7);
     List<Long> userIds = contentsHistoryRepository.findMembersWhoReadAdultContent(startDate);
     Pageable pageable = PageRequest.of(0, 10);
-    return memberRepository.findByIdIn(pageable,userIds);
+    return memberRepository.findByIdIn(pageable, userIds);
   }
 
-  public Page<ContentsHistory> findMembersByContent(Long contentsId){
+  public Page<ContentsHistory> findMembersByContent(Long contentsId) {
     Contents contents = contentsRepsitory.findById(contentsId)
         .orElseThrow(() -> new IllegalArgumentException("해당 컨텐츠가 없습니다."));
-    Pageable pageable = PageRequest.of(0,10);
-    return contentsHistoryRepository.findMembersByContent(pageable,contents);
+    Pageable pageable = PageRequest.of(0, 10);
+    return contentsHistoryRepository.findMembersByContent(pageable, contents);
   }
+
   public void addContentHistory(Member member, Contents contents) {
     ContentsHistory contentsHistory = new ContentsHistory();
     contentsHistory.setMember(member);

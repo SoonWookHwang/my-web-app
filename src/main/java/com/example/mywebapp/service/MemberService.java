@@ -1,7 +1,14 @@
 package com.example.mywebapp.service;
 
-
+import com.example.mywebapp.domain.member.Member;
+import com.example.mywebapp.domain.member.MemberInfo;
+import com.example.mywebapp.domain.member.enums.Adult;
+import com.example.mywebapp.domain.member.enums.Dormant;
+import com.example.mywebapp.dto.TokenDto;
+import com.example.mywebapp.dto.request.member.LoginRequestDto;
+import com.example.mywebapp.dto.request.member.MemberDetailsRequestDto;
 import com.example.mywebapp.dto.request.member.SignUpRequestDto;
+import com.example.mywebapp.dto.response.MemberResponseEntity;
 import com.example.mywebapp.repository.MemberInfoRepository;
 import com.example.mywebapp.repository.MemberRepository;
 import com.example.mywebapp.repository.RefreshTokenRepository;
@@ -32,6 +39,7 @@ public class MemberService implements MemberServiceAPI {
   private final JwtTokenProvider jwtTokenProvider;
   private final PasswordEncoder passwordEncoder;
   private final Logger LOGGER = LoggerFactory.getLogger(MemberService.class);
+
 
   @Override
   public String registerMember(SignUpRequestDto dto)
@@ -67,7 +75,8 @@ public class MemberService implements MemberServiceAPI {
     return "회원가입이 성공했습니다.";
   }
 
-  public TokenDto login(LoginRequestDto dto, HttpServletResponse response) throws IllegalArgumentException {
+  public TokenDto login(LoginRequestDto dto, HttpServletResponse response)
+      throws IllegalArgumentException {
     LOGGER.info("[login] 회원 정보 요청");
     Member member = memberRepository.findByUsername(dto.getUsername())
         .orElseThrow(() -> new IllegalArgumentException("회원정보가 없습니다"));
@@ -83,7 +92,7 @@ public class MemberService implements MemberServiceAPI {
     String existRefreshToken = refreshTokenRepository.findRefreshTokenByUserId(member.getId());
     LOGGER.info("[login] DB에 refreshToken이 저장되어있는지 확인");
 
-    if(existRefreshToken!=null) {
+    if (existRefreshToken != null) {
       refreshTokenRepository.deleteRefreshToken(existRefreshToken);
       LOGGER.info("[login] 기존 refreshToken 삭제");
     }
@@ -91,11 +100,8 @@ public class MemberService implements MemberServiceAPI {
     String refreshToken = jwtTokenProvider.createRefreshToken();
     LOGGER.info("[login] refreshToken 생성");
 
-
-    refreshTokenRepository.saveRefreshToken(refreshToken, member.getId(),60*60*24*30);
+    refreshTokenRepository.saveRefreshToken(refreshToken, member.getId(), 60 * 60 * 24 * 30);
     LOGGER.info("[login] DB에 refreshToken 새롭게 저장");
-
-
 
     Cookie refreshTokenCookie = new Cookie("REFRESH_TOKEN", refreshToken);
     refreshTokenCookie.setMaxAge(60 * 60 * 24 * 30);
