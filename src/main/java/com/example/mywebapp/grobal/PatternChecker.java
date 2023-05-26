@@ -5,7 +5,9 @@ import java.util.regex.Pattern;
 public final class PatternChecker {
 
   // 비밀번호 패턴 체크를 위한 정규표현식 => 최소 1개의 영어 소문자, 특수문자, 숫자를 포함 && 한글과 영어대문자 사용불가 다섯글자 이상
-  private final static String passwordPattern = "^(?=.*[0-9])(?=.*[a-z])(?=.*[@#$%^&+=])(?!.*[A-Z]).{5,}.*$";
+  private final static String passwordPattern = "^(?=.*[a-z])(?=.*\\d)(?=.*\\W)(?!.*[A-Z가-힣]).{5,15}$";
+  //"^(?=.*[a-zA-Z])(?=.*\\d)(?=.*\\W).{8,20}$"
+  //"^(?=.*[0-9])(?=.*[a-z])(?=.*[@#$%^&+=])(?!.*[A-Z가-힣]).{5,}$"
   // 유저네임 패턴 체크를 위한 정규표현식 => 8글자 이하의 영어 대소문자, 한글, 숫자로만 가능
   private final static String usernamePattern = "^[a-zA-Z0-9가-힣]{1,8}$";
 

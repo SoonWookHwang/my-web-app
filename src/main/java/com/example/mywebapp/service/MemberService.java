@@ -16,7 +16,6 @@ import com.example.mywebapp.repository.RefreshTokenRepository;
 import com.example.mywebapp.security.JwtTokenProvider;
 import java.util.Collections;
 import java.util.NoSuchElementException;
-import java.util.Optional;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
