@@ -9,12 +9,14 @@ import com.example.mywebapp.dto.request.member.LoginRequestDto;
 import com.example.mywebapp.dto.request.member.MemberDetailsRequestDto;
 import com.example.mywebapp.dto.request.member.SignUpRequestDto;
 import com.example.mywebapp.dto.response.MemberResponseEntity;
+import com.example.mywebapp.grobal.PatternChecker;
 import com.example.mywebapp.repository.MemberInfoRepository;
 import com.example.mywebapp.repository.MemberRepository;
 import com.example.mywebapp.repository.RefreshTokenRepository;
 import com.example.mywebapp.security.JwtTokenProvider;
 import java.util.Collections;
 import java.util.NoSuchElementException;
+import java.util.Optional;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
@@ -47,6 +49,9 @@ public class MemberService implements MemberServiceAPI {
     LOGGER.info("[registerMember] 회원 가입 정보 전달");
     String username = dto.getUsername();
     String password = dto.getPassword();
+    if(!PatternChecker.checkPasswordPattern(password)){
+      throw new IllegalArgumentException("비밀번호 패턴이 올바르지 않습니다");
+    }
 
     if (memberRepository.existsByUsername(dto.getUsername())) {
       throw new IllegalArgumentException("이미 존재하는 아이디입니다");
@@ -90,11 +95,15 @@ public class MemberService implements MemberServiceAPI {
     LOGGER.info("[login] 패스워드 일치");
 
     String existRefreshToken = refreshTokenRepository.findRefreshTokenByUserId(member.getId());
+
     LOGGER.info("[login] DB에 refreshToken이 저장되어있는지 확인");
 
     if (existRefreshToken != null) {
+
       refreshTokenRepository.deleteRefreshToken(existRefreshToken);
       LOGGER.info("[login] 기존 refreshToken 삭제");
+    }else{
+      LOGGER.info("[login] 레포지토리에 저장된 refreshToken 이 없음을 확인");
     }
 
     String refreshToken = jwtTokenProvider.createRefreshToken();
@@ -110,8 +119,11 @@ public class MemberService implements MemberServiceAPI {
     response.addCookie(refreshTokenCookie);
     LOGGER.info("[login] 쿠키에 refreshToken 전달");
 
+    String accessToken = jwtTokenProvider.createToken(member.getUsername(), member.getRoles());
+    response.setHeader("X-AUTH-TOKEN", accessToken);
+
     TokenDto tokenDto = TokenDto.builder()
-        .accessToken(jwtTokenProvider.createToken(member.getUsername(), member.getRoles()))
+        .accessToken(accessToken)
         .build();
     LOGGER.info("[login] 로그인 성공 TokenDto 생성");
     return tokenDto;
@@ -153,6 +165,7 @@ public class MemberService implements MemberServiceAPI {
     Member target = memberRepository.findById(memberId)
         .orElseThrow(() -> new NoSuchElementException("회원정보가 없습니다"));
     memberRepository.delete(target);
+    refreshTokenRepository.deleteRefreshToken(String.valueOf(memberId));
     return MemberResponseEntity.success("회원 삭제 성공");
   }
 

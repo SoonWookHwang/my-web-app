@@ -20,9 +20,9 @@ public class RefreshTokenRepository {
     redisTemplate.opsForValue().set(key, refreshToken, expiration, TimeUnit.MILLISECONDS);
   }
 
-  public void deleteRefreshToken(String refreshToken) {
-    redisTemplate.delete(refreshToken);
-  }
+  public void deleteRefreshToken(String userId) {
+    redisTemplate.delete(userId);
+  }  // 키값을 받아서 제거
 
   public boolean isRefreshTokenExists(Long userId) {
     String key = String.valueOf(userId); // 사용자 ID를 키로 사용
