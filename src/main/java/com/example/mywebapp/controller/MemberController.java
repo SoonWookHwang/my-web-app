@@ -3,7 +3,7 @@ package com.example.mywebapp.controller;
 import com.example.mywebapp.domain.member.Member;
 import com.example.mywebapp.domain.member.MemberInfo;
 import com.example.mywebapp.dto.request.member.LoginRequestDto;
-import com.example.mywebapp.dto.request.member.MemberDetailsRequestDto;
+import com.example.mywebapp.dto.request.member.MemberInfoRequestDto;
 import com.example.mywebapp.dto.request.member.SignUpRequestDto;
 import com.example.mywebapp.dto.response.MemberResponseEntity;
 import com.example.mywebapp.service.ContentsHistoryService;
@@ -71,7 +71,7 @@ public class MemberController implements MemberControllerAPI {
   @Override
   @PutMapping("/member/info")
   public MemberResponseEntity<MemberInfo> updateMemberInfo(
-      @RequestBody MemberDetailsRequestDto dto) {
+      @RequestBody MemberInfoRequestDto dto) {
     try {
       return memberService.updateMemberInfo(dto);
     } catch (Exception e) {

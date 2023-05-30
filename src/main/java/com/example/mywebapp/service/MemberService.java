@@ -6,7 +6,7 @@ import com.example.mywebapp.domain.member.enums.Adult;
 import com.example.mywebapp.domain.member.enums.Dormant;
 import com.example.mywebapp.dto.TokenDto;
 import com.example.mywebapp.dto.request.member.LoginRequestDto;
-import com.example.mywebapp.dto.request.member.MemberDetailsRequestDto;
+import com.example.mywebapp.dto.request.member.MemberInfoRequestDto;
 import com.example.mywebapp.dto.request.member.SignUpRequestDto;
 import com.example.mywebapp.dto.response.MemberResponseEntity;
 import com.example.mywebapp.grobal.PatternChecker;
@@ -32,6 +32,7 @@ import org.springframework.transaction.annotation.Transactional;
 @RequiredArgsConstructor
 @Transactional
 @Slf4j
+
 public class MemberService implements MemberServiceAPI {
 
   private final MemberRepository memberRepository;
@@ -40,6 +41,7 @@ public class MemberService implements MemberServiceAPI {
   private final JwtTokenProvider jwtTokenProvider;
   private final PasswordEncoder passwordEncoder;
   private final Logger LOGGER = LoggerFactory.getLogger(MemberService.class);
+
 
 
   @Override
@@ -129,7 +131,7 @@ public class MemberService implements MemberServiceAPI {
   }
 
   @Override
-  public MemberResponseEntity<MemberInfo> updateMemberInfo(MemberDetailsRequestDto dto) {
+  public MemberResponseEntity<MemberInfo> updateMemberInfo(MemberInfoRequestDto dto) {
     Member member = loginUser();
     MemberInfo updateMemberInfo = memberInfoRepository.findById(member.getId())
         .orElseThrow(() -> new IllegalArgumentException("회원정보가 없습니다."));

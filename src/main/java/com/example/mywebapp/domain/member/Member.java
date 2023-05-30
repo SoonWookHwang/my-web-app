@@ -37,7 +37,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 @Setter
 @Builder
 @AllArgsConstructor
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@NoArgsConstructor(access = AccessLevel.PUBLIC)
 public class Member extends Timestamped implements UserDetails {
 
   @Id

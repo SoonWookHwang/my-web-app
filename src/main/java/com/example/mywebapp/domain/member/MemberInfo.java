@@ -1,7 +1,7 @@
 package com.example.mywebapp.domain.member;
 
 import com.example.mywebapp.domain.Timestamped;
-import com.example.mywebapp.dto.request.member.MemberDetailsRequestDto;
+import com.example.mywebapp.dto.request.member.MemberInfoRequestDto;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -42,7 +42,7 @@ public class MemberInfo extends Timestamped {
   @JsonIgnore
   private Member member;
 
-  public void update(MemberDetailsRequestDto dto, MemberInfo target) {
+  public void update(MemberInfoRequestDto dto, MemberInfo target) {
     String email = dto.getEmail();
     int age = dto.getAge();
     String gender = dto.getGender().gender;

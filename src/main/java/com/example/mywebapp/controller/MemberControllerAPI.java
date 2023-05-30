@@ -2,7 +2,7 @@ package com.example.mywebapp.controller;
 
 import com.example.mywebapp.domain.member.Member;
 import com.example.mywebapp.domain.member.MemberInfo;
-import com.example.mywebapp.dto.request.member.MemberDetailsRequestDto;
+import com.example.mywebapp.dto.request.member.MemberInfoRequestDto;
 import com.example.mywebapp.dto.request.member.SignUpRequestDto;
 import com.example.mywebapp.dto.response.MemberResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -24,7 +24,7 @@ public interface MemberControllerAPI {
 
   // 회원정보수정
   @PutMapping
-  MemberResponseEntity<MemberInfo> updateMemberInfo(MemberDetailsRequestDto dto);
+  MemberResponseEntity<MemberInfo> updateMemberInfo(MemberInfoRequestDto dto);
 
   // 휴면계정 설정
   @PutMapping
