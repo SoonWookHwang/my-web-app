@@ -20,6 +20,7 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
 import org.hibernate.annotations.OnDelete;
@@ -31,6 +32,7 @@ import org.hibernate.annotations.OnDeleteAction;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @DynamicInsert
 @DynamicUpdate
+@ToString
 public class Contents extends Timestamped {
 
   @Id
@@ -96,4 +98,5 @@ public class Contents extends Timestamped {
     contents.coin = setCoin;
     contents.isFree = ContentsType.PAYED.status;
   }
+
 }

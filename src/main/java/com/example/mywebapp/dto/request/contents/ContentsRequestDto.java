@@ -5,10 +5,14 @@ import com.example.mywebapp.domain.content.ContentsType;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
+import lombok.Setter;
 
 @AllArgsConstructor
 @Getter
+@Setter
+@Builder
 public class ContentsRequestDto {
 
   private String title;
